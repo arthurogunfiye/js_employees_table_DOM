@@ -246,32 +246,6 @@ function addRowFromForm(form) {
   pushNotification('success', 'Employee successfully added.');
 }
 
-function pushNotification(type, description) {
-  const existing = document.querySelector('[data-qa="notification"]');
-
-  if (existing) {
-    existing.remove();
-  }
-
-  const notification = document.createElement('div');
-  const notificationTitle = document.createElement('h2');
-  const notificationText = document.createElement('p');
-
-  notification.dataset.qa = 'notification';
-  notification.classList.add('notification', type);
-
-  notificationTitle.className = 'title';
-  notificationTitle.innerHTML = type === 'error' ? 'Error!' : 'Success!';
-  notificationText.textContent = description;
-
-  notification.appendChild(notificationTitle);
-  notification.appendChild(notificationText);
-
-  document.body.append(notification);
-
-  setTimeout(() => document.body.removeChild(notification), 4000);
-}
-
 function cellEdit(e) {
   const cell = e.target.closest('td');
 
@@ -318,4 +292,30 @@ function saveCellEdit(cell, originalValue = '') {
   cell.textContent = newValue === '' ? originalValue : newValue;
 
   currentlyEditing = null;
+}
+
+function pushNotification(type, description) {
+  const existing = document.querySelector('[data-qa="notification"]');
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const notification = document.createElement('div');
+  const notificationTitle = document.createElement('h2');
+  const notificationText = document.createElement('p');
+
+  notification.dataset.qa = 'notification';
+  notification.classList.add('notification', type);
+
+  notificationTitle.className = 'title';
+  notificationTitle.innerHTML = type === 'error' ? 'Error!' : 'Success!';
+  notificationText.textContent = description;
+
+  notification.appendChild(notificationTitle);
+  notification.appendChild(notificationText);
+
+  document.body.append(notification);
+
+  setTimeout(() => document.body.removeChild(notification), 4000);
 }
